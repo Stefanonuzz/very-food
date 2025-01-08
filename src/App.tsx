@@ -2,20 +2,15 @@ import ApiCall from "./api/ApiCall";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import HomePage from "./components/HomePage";
-import { useState } from "react";
-import { Pizza } from "./components/PizzaList";
+import { useContext } from "react";
+import ShopContext from "./context/ShopContext";
 
 function App() {
-  const [shop, setShop] = useState<Pizza[]>([]);
-
-  const addToCart = (pizza: Pizza) => {
-    setShop([...shop, pizza]);
-    console.log(shop);
-  };
+  const { shop, addToCart } = useContext(ShopContext);
 
   return (
     <div className="text-black">
-      <NavBar shop={shop} />
+      <NavBar />
       <HomePage />
       <ApiCall onClick={addToCart} />
       <Footer />

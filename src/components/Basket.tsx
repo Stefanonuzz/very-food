@@ -1,3 +1,4 @@
+import { useContext, useState } from "react";
 import {
   Drawer,
   Box,
@@ -9,15 +10,11 @@ import {
   Badge,
   Button,
 } from "@mui/material";
-import { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { Pizza } from "./PizzaList";
+import ShopContext from "../context/ShopContext";
 
-interface BasketProps {
-  shop: Pizza[];
-}
-
-export const Basket = ({ shop }: BasketProps) => {
+export const Basket = () => {
+  const { shop, addToCart } = useContext(ShopContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (

@@ -6,8 +6,11 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { colors } from "@mui/material";
 import { Basket } from "./Basket";
+import { useContext } from "react";
+import ShopContext from "../context/ShopContext";
 
-export default function NavBar({ shop }) {
+export default function NavBar() {
+  const { shop } = useContext(ShopContext);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{ backgroundColor: colors.red[900] }} position="fixed">

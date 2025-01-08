@@ -1,4 +1,3 @@
-// pages/ApiCall.tsx
 import { useState } from "react";
 import FetchPizzas from "./FetchPizzas";
 import PizzaList from "../components/PizzaList";
