@@ -5,12 +5,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { colors } from "@mui/material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Basket } from "./Basket";
 
-export default function NavBar() {
+export default function NavBar({ shop }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar style={{ backgroundColor: colors.red[800] }} position="static">
+      <AppBar style={{ backgroundColor: colors.red[900] }} position="fixed">
         <Toolbar>
           <IconButton
             size="large"
@@ -25,9 +25,9 @@ export default function NavBar() {
           <Button color="inherit">Home</Button>
           <Button color="inherit">Prodotti</Button>
           <Button color="inherit">Area Pizzaiolo</Button>
-          <Button color="inherit">
-            <AddShoppingCartIcon />
-          </Button>
+          <div className="ml-4">
+            <Basket shop={shop} />
+          </div>
         </Toolbar>
       </AppBar>
     </Box>

@@ -11,13 +11,13 @@ interface ApiProps {
   image: string;
 }
 
-export default function ApiCall() {
+export default function ApiCall({ onClick }) {
   const [pizzas, setPizzas] = useState<ApiProps[]>([]);
 
   return (
     <>
       <FetchPizzas onFetch={setPizzas} />
-      <PizzaList pizzas={pizzas} />
+      <PizzaList pizzas={pizzas} onClick={onClick} />
     </>
   );
 }

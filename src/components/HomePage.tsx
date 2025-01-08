@@ -4,7 +4,7 @@ export default function HomePage() {
       <div>
         <img
           className="w-full"
-          src="photos/pizzasfondo.jpg"
+          src="photos/pizzasfondo.png"
           alt="pizza margherita"
         />
       </div>
