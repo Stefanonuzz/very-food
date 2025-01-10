@@ -1,23 +1,29 @@
+import { useEffect, useState } from "react";
+import { Pizza } from "../types/Pizza";
 import Card from "./Card";
-
-export interface Pizza {
-  id: number;
-  name: string;
-  price: number;
-  ingredients: string[];
-  image: string;
-}
+import axios from "axios";
 
 export interface PizzaListProps {
-  pizzas: Pizza[];
-  onClick: (pizza: Pizza) => void;
-  shop: string[];
+  addToCart: (pizza: Pizza) => void;
 }
 
-export default function PizzaList({ pizzas, onClick }: PizzaListProps) {
+export default function PizzaList({ addToCart }: PizzaListProps) {
+  const [pizzas, setPizzas] = useState<Pizza[]>([]);
   const handleClick = (pizza: Pizza) => {
-    onClick(pizza);
+    addToCart(pizza);
   };
+
+  useEffect(() => {
+    axios
+      .get<Pizza[]>("http://localhost:8000/pizze")
+      .then((response) => {
+        setPizzas(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <div className="grid grid-cols-3 container mx-auto mt-8">
       <h2 className="text-3xl font-bold col-span-3 flex justify-center mb-6">

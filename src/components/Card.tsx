@@ -68,13 +68,15 @@ function Card({ name, price, ingredients, image, onClick }: CardProps) {
         onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Prodotto inserito nel carrello!
-        </Alert>
+        <div className="mt-12">
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Prodotto inserito nel carrello!
+          </Alert>
+        </div>
       </Snackbar>
     </>
   );
