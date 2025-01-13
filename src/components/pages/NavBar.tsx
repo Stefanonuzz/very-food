@@ -17,7 +17,7 @@ export default function NavBar() {
   const { shop, user } = useContext(ShopContext);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const goToLogin = () => {
     navigate("/login");
   };
 
@@ -48,7 +48,7 @@ export default function NavBar() {
               </IconButton>
             </Box>
           ) : (
-            <Button onClick={handleClick} color="inherit">
+            <Button onClick={goToLogin} color="inherit">
               Area Utenti
             </Button>
           )}
