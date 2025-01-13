@@ -5,7 +5,7 @@ import PizzaList from "./PizzaList";
 import Footer from "./Footer";
 
 export default function Header() {
-  const { addToCart, removeFromCart, moveToOrders } = useContext(ShopContext);
+  const { addToCart, removeFromCart } = useContext(ShopContext);
 
   return (
     <>
