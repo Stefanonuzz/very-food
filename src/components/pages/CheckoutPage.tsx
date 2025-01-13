@@ -7,7 +7,7 @@ import {
   Paper,
 } from "@mui/material";
 import { useContext } from "react";
-import ShopContext from "../context/ShopContext";
+import ShopContext from "../../context/ShopContext";
 
 export default function CheckoutPage() {
   const { moveToOrders } = useContext<ShopContextType>(ShopContext);

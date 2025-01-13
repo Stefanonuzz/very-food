@@ -19,6 +19,7 @@ const ShopContext = createContext<ShopContextType>({
 
 const ShopProvider = ({ children }: { children: ReactNode }) => {
   const [shop, setShop] = useState<ShopElement[]>([]);
+  const [user, setUser] = useState(null);
 
   const fetchCart = async () => {
     try {
@@ -80,7 +81,7 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ShopContext.Provider
-      value={{ shop, addToCart, removeFromCart, moveToOrders }}
+      value={{ shop, addToCart, removeFromCart, moveToOrders, user, setUser }}
     >
       {children}
     </ShopContext.Provider>

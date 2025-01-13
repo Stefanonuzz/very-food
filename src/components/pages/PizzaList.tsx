@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Pizza } from "../types/Pizza";
-import Card from "./Card";
+import { Pizza } from "../../types/Pizza";
+import Card from "../Card";
 import axios from "axios";
 
 export interface PizzaListProps {

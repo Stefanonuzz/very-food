@@ -1,25 +1,54 @@
 {
   "pizze": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Margherita",
       "price": 7,
-      "ingredients": ["Pomodoro", "Mozzarella", "Basilico"],
+      "ingredients": [
+        "Pomodoro",
+        "Mozzarella",
+        "Basilico"
+      ],
       "image": "photos/margherita.avif"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Diavola",
       "price": 8.5,
-      "ingredients": ["Pomodoro", "Mozzarella", "Salame"],
+      "ingredients": [
+        "Pomodoro",
+        "Mozzarella",
+        "Salame"
+      ],
       "image": "photos/diavola.jpeg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Salsiccia e Friarelli",
       "price": 9.5,
-      "ingredients": ["Pomodoro", "Mozzarella", "Salsiccia", "Friarelli"],
+      "ingredients": [
+        "Pomodoro",
+        "Mozzarella",
+        "Salsiccia",
+        "Friarelli"
+      ],
       "image": "photos/salsiccia.jpeg"
+    }
+  ],
+  "users": [
+    {
+      "role": "user",
+      "name": "Stefano",
+      "surname": "Nuzzone",
+      "username": "utente@awesome.it",
+      "password": "utente"
+    },
+    {
+      "role": "pizzaiolo",
+      "name": "Pizzaiolo",
+      "surname": "Awesome",
+      "username": "pizzaiolo@awesome.it",
+      "password": "pizzaiolo"
     }
   ],
   "carrello": [],

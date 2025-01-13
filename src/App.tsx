@@ -1,22 +1,21 @@
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import HomePage from "./components/HomePage";
-import { useContext } from "react";
-import ShopContext from "./context/ShopContext";
-import PizzaList from "./components/PizzaList";
-import CheckoutPage from "./components/CheckoutPage";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./components/pages/LoginPage";
+import Header from "./components/pages/Header";
+import CheckoutPage from "./components/pages/CheckoutPage";
+import PizzaioloPage from "./components/pages/PizzaioloPage";
 
 function App() {
-  const { addToCart, removeFromCart, moveToOrders } = useContext(ShopContext);
-
   return (
-    <div className="text-black">
-      <NavBar />
-      <HomePage />
-      <PizzaList addToCart={addToCart} removeFromCart={removeFromCart} />
-      <Footer />
-      <CheckoutPage moveToOrders={moveToOrders} />
-    </div>
+    <Router>
+      <div className="text-black">
+        <Routes>
+          <Route path="/" element={<Header />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/pizzaiolo-page" element={<PizzaioloPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
