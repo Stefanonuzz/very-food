@@ -19,10 +19,10 @@ export default function PizzaioloPage() {
   const { pizzaOrders, setPizzaOrders, fetchOrders } = useContext(ShopContext);
 
   useEffect(() => {
-    fetchOrders();
+    if (fetchOrders) fetchOrders();
   }, []);
 
-  const updateOrderStatus = async (orderId, newStatus) => {
+  const updateOrderStatus = async (orderId: number, newStatus: string) => {
     try {
       const updatedOrders = pizzaOrders.map((order) =>
         order.id === orderId ? { ...order, state: newStatus } : order
@@ -38,7 +38,7 @@ export default function PizzaioloPage() {
     }
   };
 
-  const removeFromOrders = async (orderId) => {
+  const removeFromOrders = async (orderId: number) => {
     try {
       setPizzaOrders(pizzaOrders.filter((order) => order.id !== orderId));
 

@@ -2,11 +2,16 @@ import { Box, Drawer, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import ShopContext from "../context/ShopContext";
 
-export default function CheckOrder({ isDrawerOpen, onClose }) {
+interface CheckOrderProps {
+  isDrawerOpen: boolean;
+  onClose: () => void;
+}
+
+export default function CheckOrder({ isDrawerOpen, onClose }: CheckOrderProps) {
   const { pizzaOrders, fetchOrders } = useContext(ShopContext);
 
   useEffect(() => {
-    fetchOrders();
+    if (fetchOrders) fetchOrders();
   }, [fetchOrders]);
 
   return (

@@ -1,26 +1,42 @@
-import { createContext, useState, ReactNode, useEffect } from "react";
+import {
+  createContext,
+  useState,
+  ReactNode,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import axios from "axios";
 import { Pizza } from "../types/Pizza";
 import { ShopElement } from "../types/Shop";
+import { Order } from "../types/Order";
 
 export type ShopContextType = {
   shop: ShopElement[];
   addToCart: (pizza: Pizza) => void;
-  removeFromCart?: (pizza: Pizza) => void;
-  moveToOrders?: (pizza: Pizza) => void;
+  removeFromCart: (pizzaId: number) => void;
+  moveToOrders: () => void;
+  fetchOrders?: () => void;
+  pizzaOrders: Order[];
+  setPizzaOrders: Dispatch<SetStateAction<Order[]>>;
+  user: string;
 };
 
 const ShopContext = createContext<ShopContextType>({
   shop: [],
   addToCart: (pizza: Pizza) => {},
-  removeFromCart: (pizza: Pizza) => {},
-  moveToOrders: (pizza: Pizza) => {},
+  removeFromCart: (pizzaId: number) => {},
+  moveToOrders: () => {},
+  pizzaOrders: [],
+  fetchOrders: () => {},
+  setPizzaOrders: () => {},
+  user: "",
 });
 
 const ShopProvider = ({ children }: { children: ReactNode }) => {
   const [shop, setShop] = useState<ShopElement[]>([]);
   const [user, setUser] = useState(null);
-  const [pizzaOrders, setPizzaOrders] = useState([]);
+  const [pizzaOrders, setPizzaOrders] = useState<Order[]>([]);
 
   const fetchCart = async () => {
     try {

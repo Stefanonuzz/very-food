@@ -6,7 +6,6 @@ import {
   Typography,
   Box,
   colors,
-  Drawer,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +17,7 @@ import CheckOrder from "../CheckOrder";
 export default function NavBar() {
   const { shop, user } = useContext(ShopContext);
   const navigate = useNavigate();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
   const goToLogin = () => {
     navigate("/login");
