@@ -6,34 +6,67 @@ import {
   Typography,
   Box,
   colors,
+  Drawer,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ShopContext from "../../context/ShopContext";
 import { Basket } from "../Basket";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CheckOrder from "../CheckOrder";
 
 export default function NavBar() {
   const { shop, user } = useContext(ShopContext);
   const navigate = useNavigate();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const goToLogin = () => {
     navigate("/login");
   };
 
-  const handleProfileClick = () => {
+  const goToHome = () => {
     navigate("/");
+  };
+
+  const handleDrawerOpen = () => {
+    setIsDrawerOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setIsDrawerOpen(false);
   };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{ backgroundColor: colors.red[900] }} position="fixed">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Awesome Pizza
-          </Typography>
-          <Button color="inherit">Home</Button>
-          <Button color="inherit">Prodotti</Button>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+              flexGrow: 1,
+            }}
+            onClick={goToHome}
+          >
+            <img
+              src="photos/awesome logo.png"
+              alt="Awesome Logo"
+              style={{
+                width: 30,
+                height: 30,
+              }}
+            />
+            <Typography variant="h6" component="div">
+              wesome Pizza
+            </Typography>
+          </Box>
+          <Button onClick={goToHome} color="inherit">
+            Home
+          </Button>
+          <Button color="inherit" onClick={handleDrawerOpen}>
+            Area Utente
+          </Button>
           {user ? (
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Typography
@@ -43,13 +76,13 @@ export default function NavBar() {
               >
                 {user.name}
               </Typography>
-              <IconButton color="inherit" onClick={handleProfileClick}>
+              <IconButton color="inherit" onClick={handleDrawerOpen}>
                 <AccountCircleIcon />
               </IconButton>
             </Box>
           ) : (
             <Button onClick={goToLogin} color="inherit">
-              Area Utenti
+              Area Pizzaiolo
             </Button>
           )}
           <div className="ml-4">
@@ -57,6 +90,7 @@ export default function NavBar() {
           </div>
         </Toolbar>
       </AppBar>
+      <CheckOrder isDrawerOpen={isDrawerOpen} onClose={handleDrawerClose} />
     </Box>
   );
 }

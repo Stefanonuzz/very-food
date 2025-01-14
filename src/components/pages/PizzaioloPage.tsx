@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import {
   Box,
   Card,
@@ -13,18 +13,10 @@ import {
   Button,
 } from "@mui/material";
 import axios from "axios";
+import ShopContext from "../../context/ShopContext";
 
 export default function PizzaioloPage() {
-  const [pizzaOrders, setPizzaOrders] = useState([]);
-
-  const fetchOrders = async () => {
-    try {
-      const response = await axios.get("http://localhost:8000/ordini");
-      setPizzaOrders(response.data);
-    } catch (error) {
-      console.error("Errore nel caricamento degli ordini:", error);
-    }
-  };
+  const { pizzaOrders, setPizzaOrders, fetchOrders } = useContext(ShopContext);
 
   useEffect(() => {
     fetchOrders();
@@ -66,83 +58,94 @@ export default function PizzaioloPage() {
         textAlign: "center",
       }}
     >
-      {pizzaOrders.map((order) => (
-        <Box key={order.id} mb={2}>
-          <Typography variant="h6" gutterBottom>
-            Ordine {order.id} - Stato: {order.state || "Ordine ricevuto"}
-          </Typography>
-          <Grid container spacing={2} justifyContent="center">
-            {/* Grande card con le pizze */}
-            <Grid item xs={8}>
-              {order.pizze.map((pizza, index) => (
-                <Card
-                  key={`pizza-${pizza.id}-${index}`}
-                  variant="outlined"
-                  sx={{ mb: 1 }}
-                >
-                  <CardContent>
-                    <Grid container spacing={2} alignItems="center">
-                      <Grid item>
-                        <img
-                          src={pizza.image}
-                          alt={pizza.name}
-                          style={{ width: 80, height: "auto" }}
-                        />
-                      </Grid>
+      <Typography variant="h4" gutterBottom>
+        Area Pizzaiolo
+      </Typography>
+      {pizzaOrders.length === 0 ? (
+        <Typography variant="body1" component="div" textAlign="center">
+          Non ci sono ordini
+        </Typography>
+      ) : (
+        pizzaOrders.map((order) => (
+          <Box key={order.id} mb={2}>
+            <Typography
+              variant="h6"
+              style={{ textAlign: "start", marginBottom: "30px" }}
+              gutterBottom
+            >
+              Ordine {order.id} - Stato: {order.state || "Ordine ricevuto"}
+            </Typography>
+            <Grid container spacing={2} justifyContent="center">
+              <Grid item xs={8}>
+                {order.pizze.map((pizza, index) => (
+                  <Card
+                    key={`pizza-${pizza.id}-${index}`}
+                    variant="outlined"
+                    sx={{ mb: 1 }}
+                  >
+                    <CardContent>
+                      <Grid container spacing={2} alignItems="center">
+                        <Grid item>
+                          <img
+                            src={pizza.image}
+                            alt={pizza.name}
+                            style={{ width: 80, height: "auto" }}
+                          />
+                        </Grid>
 
-                      <Grid item xs>
-                        <Typography variant="h6">{pizza.name}</Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          Prezzo: €{pizza.price}
-                        </Typography>
-                        <Typography variant="body2">
-                          Ingredienti: {pizza.ingredients.join(", ")}
-                        </Typography>
+                        <Grid item xs>
+                          <Typography variant="h6">{pizza.name}</Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            Prezzo: €{pizza.price}
+                          </Typography>
+                          <Typography variant="body2">
+                            Ingredienti: {pizza.ingredients.join(", ")}
+                          </Typography>
+                        </Grid>
                       </Grid>
-                    </Grid>
+                    </CardContent>
+                  </Card>
+                ))}
+              </Grid>
+
+              <Grid item xs={4}>
+                <Card variant="outlined" sx={{ height: "240px" }}>
+                  <CardContent>
+                    <FormControl fullWidth>
+                      <InputLabel>Stato</InputLabel>
+                      <Select
+                        value={order.state || "Ordine ricevuto"}
+                        label="Stato"
+                        onChange={(e) =>
+                          updateOrderStatus(order.id, e.target.value)
+                        }
+                      >
+                        <MenuItem value="Ordine ricevuto">
+                          Ordine ricevuto
+                        </MenuItem>
+                        <MenuItem value="In preparazione">
+                          In preparazione
+                        </MenuItem>
+                        <MenuItem value="Completato">Completato</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <Box mt={2}>
+                      <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => removeFromOrders(order.id)}
+                      >
+                        Evadi l'ordine
+                      </Button>
+                    </Box>
                   </CardContent>
                 </Card>
-              ))}
+              </Grid>
             </Grid>
-
-            {/* Nuova card accanto alla grande card */}
-            <Grid item xs={4}>
-              <Card variant="outlined" sx={{ height: "240px" }}>
-                <CardContent>
-                  <FormControl fullWidth>
-                    <InputLabel>Stato</InputLabel>
-                    <Select
-                      value={order.state || "Ordine ricevuto"}
-                      label="Stato"
-                      onChange={(e) =>
-                        updateOrderStatus(order.id, e.target.value)
-                      }
-                    >
-                      <MenuItem value="Ordine ricevuto">
-                        Ordine ricevuto
-                      </MenuItem>
-                      <MenuItem value="In preparazione">
-                        In preparazione
-                      </MenuItem>
-                      <MenuItem value="Completato">Completato</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <Box mt={2}>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() => removeFromOrders(order.id)}
-                    >
-                      Evadi l'ordine
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-          <Divider />
-        </Box>
-      ))}
+            <Divider />
+          </Box>
+        ))
+      )}
     </Box>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Pizza } from "../../types/Pizza";
-import Card from "../Card";
+import PizzaCard from "../PizzaCard";
 import axios from "axios";
 
 export interface PizzaListProps {
@@ -30,7 +30,7 @@ export default function PizzaList({ addToCart }: PizzaListProps) {
         Seleziona il prodotto
       </h2>
       {pizzas.map((pizza) => (
-        <Card
+        <PizzaCard
           key={pizza.id}
           name={pizza.name}
           image={pizza.image}

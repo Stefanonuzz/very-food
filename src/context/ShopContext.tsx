@@ -20,6 +20,7 @@ const ShopContext = createContext<ShopContextType>({
 const ShopProvider = ({ children }: { children: ReactNode }) => {
   const [shop, setShop] = useState<ShopElement[]>([]);
   const [user, setUser] = useState(null);
+  const [pizzaOrders, setPizzaOrders] = useState([]);
 
   const fetchCart = async () => {
     try {
@@ -34,6 +35,15 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
     fetchCart();
   }, []);
 
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/ordini");
+      setPizzaOrders(response.data);
+    } catch (error) {
+      console.error("Errore nel caricamento degli ordini:", error);
+    }
+  };
+
   const addToCart = async (pizza: Pizza) => {
     await axios.post("http://localhost:8000/carrello", {
       pizza: pizza,
@@ -43,7 +53,6 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeFromCart = (pizzaId: number) => {
-    // Trova l'ID del carrello corrispondente alla pizza
     const cartItem = shop.find((item) => item.pizza.id === pizzaId);
 
     if (cartItem) {
@@ -81,7 +90,17 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ShopContext.Provider
-      value={{ shop, addToCart, removeFromCart, moveToOrders, user, setUser }}
+      value={{
+        shop,
+        addToCart,
+        removeFromCart,
+        moveToOrders,
+        user,
+        setUser,
+        pizzaOrders,
+        setPizzaOrders,
+        fetchOrders,
+      }}
     >
       {children}
     </ShopContext.Provider>

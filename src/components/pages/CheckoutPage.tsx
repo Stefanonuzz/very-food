@@ -7,14 +7,14 @@ import {
   Paper,
 } from "@mui/material";
 import { useContext } from "react";
-import ShopContext from "../../context/ShopContext";
+import ShopContext, { ShopContextType } from "../../context/ShopContext";
 
 export default function CheckoutPage() {
   const { moveToOrders } = useContext<ShopContextType>(ShopContext);
 
   return (
     <Container maxWidth="sm">
-      <Paper sx={{ padding: 3 }}>
+      <Paper sx={{ padding: 3, marginTop: 15 }}>
         <Typography variant="h4" gutterBottom>
           Checkout
         </Typography>

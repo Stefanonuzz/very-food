@@ -18,7 +18,13 @@ interface CardProps {
   onClick: () => void;
 }
 
-function Card({ name, price, ingredients, image, onClick }: CardProps) {
+export default function PizzaCard({
+  name,
+  price,
+  ingredients,
+  image,
+  onClick,
+}: CardProps) {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleClick = () => {
@@ -81,5 +87,3 @@ function Card({ name, price, ingredients, image, onClick }: CardProps) {
     </>
   );
 }
-
-export default Card;

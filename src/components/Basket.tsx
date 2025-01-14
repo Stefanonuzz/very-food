@@ -14,6 +14,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShopContext, { ShopContextType } from "../context/ShopContext";
 import { countByProperty } from "../utils/utils";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useNavigate } from "react-router-dom";
 
 export const Basket = () => {
   const { shop, removeFromCart } = useContext<ShopContextType>(ShopContext);
@@ -21,6 +22,11 @@ export const Basket = () => {
 
   const pizzasFromShop = shop.map((item) => item.pizza);
   const groupedShop = countByProperty(pizzasFromShop, "id");
+  const navigate = useNavigate();
+
+  const goToCheckout = () => {
+    navigate("/checkout");
+  };
 
   return (
     <>
@@ -88,7 +94,12 @@ export const Basket = () => {
           </List>
           {shop.length > 0 && (
             <Box mt={2}>
-              <Button variant="contained" color="error" fullWidth>
+              <Button
+                onClick={goToCheckout}
+                variant="contained"
+                color="error"
+                fullWidth
+              >
                 Procedi all'ordine
               </Button>
             </Box>
