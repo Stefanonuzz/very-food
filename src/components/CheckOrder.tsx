@@ -37,7 +37,7 @@ export default function CheckOrder({ isDrawerOpen, onClose }: CheckOrderProps) {
                 Ordine {order.id}
               </Typography>
               <Typography variant="body1" component="div">
-                Stato: {order.state}
+                Stato: {order.state ?? "Ordine inviato"}
               </Typography>
             </Box>
           ))

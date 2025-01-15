@@ -25,6 +25,7 @@ export const Basket = () => {
   const navigate = useNavigate();
 
   const goToCheckout = () => {
+    setIsDrawerOpen(false);
     navigate("/checkout");
   };
 

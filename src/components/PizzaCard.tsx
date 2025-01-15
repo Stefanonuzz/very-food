@@ -5,10 +5,9 @@ import {
   Typography,
   Button,
   Box,
-  Snackbar,
-  Alert,
 } from "@mui/material";
 import { useState } from "react";
+import Banner from "./SnackBar";
 
 interface CardProps {
   name: string;
@@ -66,24 +65,13 @@ export default function PizzaCard({
             </Button>
           </Box>
         </CardContent>
+        <Banner
+          open={openSnackbar}
+          severity="success"
+          message="Prodotto inserito nel carrello!"
+          onClose={handleCloseSnackbar}
+        />
       </MuiCard>
-
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={3000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      >
-        <div className="mt-12">
-          <Alert
-            onClose={handleCloseSnackbar}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Prodotto inserito nel carrello!
-          </Alert>
-        </div>
-      </Snackbar>
     </>
   );
 }

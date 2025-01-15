@@ -1,53 +1,32 @@
-import * as React from "react";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
+import { Alert, Snackbar } from "@mui/material";
 
-interface State extends SnackbarOrigin {
+interface BannerProps {
+  severity: "error" | "warning" | "info" | "success";
+  message: string;
   open: boolean;
+  onClose: () => void;
 }
 
-export default function PositionedSnackbar() {
-  const [state, setState] = React.useState<State>({
-    open: false,
-    vertical: "top",
-    horizontal: "center",
-  });
-  const { vertical, horizontal, open } = state;
-
-  const handleClick = (newState: SnackbarOrigin) => () => {
-    setState({ ...newState, open: true });
-  };
-
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
-
-  const buttons = (
-    <React.Fragment>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Grid item xs={6} sx={{ textAlign: "right" }}>
-          <Button
-            onClick={handleClick({ vertical: "top", horizontal: "right" })}
-          >
-            Acquista
-          </Button>
-        </Grid>
-      </Box>
-    </React.Fragment>
-  );
-
+export default function Banner({
+  severity,
+  message,
+  open,
+  onClose,
+}: BannerProps) {
   return (
-    <Box sx={{ width: 500 }}>
-      {buttons}
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
-        onClose={handleClose}
-        message="I love snacks"
-        key={vertical + horizontal}
-      />
-    </Box>
+    <Snackbar
+      open={open}
+      autoHideDuration={3000}
+      onClose={onClose}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    >
+      <Alert
+        onClose={onClose}
+        severity={severity}
+        sx={{ width: "100%", marginTop: 5 }}
+      >
+        {message}
+      </Alert>
+    </Snackbar>
   );
 }
