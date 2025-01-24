@@ -10,6 +10,7 @@ import axios from "axios";
 import { Pizza } from "../types/Pizza";
 import { ShopElement } from "../types/Shop";
 import { Order } from "../types/Order";
+import { User } from "../types/User";
 
 export type ShopContextType = {
   shop: ShopElement[];
@@ -19,18 +20,18 @@ export type ShopContextType = {
   fetchOrders?: () => void;
   pizzaOrders: Order[];
   setPizzaOrders: Dispatch<SetStateAction<Order[]>>;
-  user: string;
+  user: User[];
 };
 
 const ShopContext = createContext<ShopContextType>({
   shop: [],
-  addToCart: (pizza: Pizza) => {},
-  removeFromCart: (pizzaId: number) => {},
+  addToCart: () => {},
+  removeFromCart: () => {},
   moveToOrders: () => {},
   pizzaOrders: [],
   fetchOrders: () => {},
   setPizzaOrders: () => {},
-  user: "",
+  user: [],
 });
 
 const ShopProvider = ({ children }: { children: ReactNode }) => {
