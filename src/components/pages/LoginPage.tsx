@@ -27,8 +27,8 @@ export default function LoginPage() {
 
         if (loggedUser.role === "user") {
           navigate("/");
-        } else if (loggedUser.role === "pizzaiolo") {
-          navigate("/pizzaiolo-page");
+        } else if (loggedUser.role === "admin") {
+          navigate("/admin-page");
         }
       } else {
         setErrorMessage("Username o password errati");
@@ -73,7 +73,7 @@ export default function LoginPage() {
           {errorMessage && (
             <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
           )}
-          <Button type="submit" variant="contained" color="error" fullWidth>
+          <Button type="submit" variant="contained" color="warning" fullWidth>
             Login
           </Button>
         </form>

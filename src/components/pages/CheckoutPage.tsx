@@ -97,7 +97,7 @@ export default function CheckoutPage() {
               </Grid>
               <Button
                 variant="contained"
-                color="error"
+                color="warning"
                 sx={{ mt: 3 }}
                 onClick={handleOrder}
               >

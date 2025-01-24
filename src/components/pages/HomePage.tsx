@@ -1,22 +1,8 @@
 export default function HomePage() {
   return (
-    <div className="h-screen grid grid-cols-2 text-5xl items-center font-bold">
-      <div>
-        <img
-          className="w-full"
-          src="photos/pizzasfondo.png"
-          alt="pizza margherita"
-        />
-      </div>
-      <div className="mr-10">
-        <h1>
-          La pizza più <span className="text-red-600">Awesome </span>
-          direttamente a casa tua
-        </h1>
-        <p className="text-2xl mt-8 font-normal">
-          Scegli tra le nostre migliori proposte contemporanee!
-        </p>
-      </div>
+    <div className="h-screen flex flex-col justify-center items-center text-center text-4xl">
+      <img className="w-1/3 mt-5" src="photos/Logo-VF.png" alt="Logo" />
+      <h1>Qualità e convenienza senza eguali!</h1>
     </div>
   );
 }

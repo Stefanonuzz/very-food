@@ -1,6 +1,6 @@
-import { Pizza } from "./Pizza";
+import { Food } from "./Food";
 
 export interface ShopElement {
-  pizza: Pizza;
+  food: Food;
   id: number;
 }

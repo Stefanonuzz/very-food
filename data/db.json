@@ -1,38 +1,25 @@
 {
-  "pizze": [
+  "food": [
     {
       "id": "1",
-      "name": "Margherita",
-      "price": 7,
-      "ingredients": [
-        "Pomodoro",
-        "Mozzarella",
-        "Basilico"
-      ],
-      "image": "photos/margherita.avif"
+      "name": "Very Hamburger",
+      "price": 8,
+      "description": "Il nostro classico ma speciale Hamburger. Solo per Very intenditori",
+      "image": "photos/hamburger.png"
     },
     {
       "id": "2",
-      "name": "Diavola",
-      "price": 8.5,
-      "ingredients": [
-        "Pomodoro",
-        "Mozzarella",
-        "Salame"
-      ],
-      "image": "photos/diavola.jpeg"
+      "name": "Very Vegan-Burger",
+      "price": 8,
+      "description": "New entry del nostro menù: un panino tutto da gustare con Very ingredienti vegani",
+      "image": "photos/veganburger.jpg"
     },
     {
       "id": "3",
-      "name": "Salsiccia e Friarelli",
-      "price": 9.5,
-      "ingredients": [
-        "Pomodoro",
-        "Mozzarella",
-        "Salsiccia",
-        "Friarelli"
-      ],
-      "image": "photos/salsiccia.jpeg"
+      "name": "Very Chicken",
+      "price": 5,
+      "description": "Prova il nostro Very Chichen, un piatto super light che ti lascerà a bocca... piena!",
+      "image": "photos/chicken.jpg"
     }
   ],
   "users": [
@@ -40,16 +27,16 @@
       "role": "user",
       "name": "Stefano",
       "surname": "Nuzzone",
-      "username": "utente@awesome.it",
+      "username": "utente@veryfood.it",
       "password": "utente",
       "id": "2ac5"
     },
     {
-      "role": "pizzaiolo",
-      "name": "Pizzaiolo",
-      "surname": "Awesome",
-      "username": "pizzaiolo@awesome.it",
-      "password": "pizzaiolo",
+      "role": "admin",
+      "name": "Admin",
+      "surname": "Very Food",
+      "username": "admin@veryfood.it",
+      "password": "admin",
       "id": "c2af"
     }
   ],

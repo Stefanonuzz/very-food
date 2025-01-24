@@ -1,7 +1,7 @@
-import { Pizza } from "./Pizza";
+import { Food } from "./Food";
 
 export interface Order {
   id: number;
-  pizze: Pizza[];
+  food: Food[];
   state: string;
 }

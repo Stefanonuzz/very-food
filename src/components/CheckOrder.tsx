@@ -8,7 +8,7 @@ interface CheckOrderProps {
 }
 
 export default function CheckOrder({ isDrawerOpen, onClose }: CheckOrderProps) {
-  const { pizzaOrders, fetchOrders } = useContext(ShopContext);
+  const { foodOrders, fetchOrders } = useContext(ShopContext);
 
   useEffect(() => {
     if (fetchOrders) fetchOrders();
@@ -26,12 +26,12 @@ export default function CheckOrder({ isDrawerOpen, onClose }: CheckOrderProps) {
         >
           Ordini
         </Typography>
-        {pizzaOrders.length === 0 ? (
+        {foodOrders.length === 0 ? (
           <Typography variant="body1" component="div" textAlign="center">
             Non ci sono ordini
           </Typography>
         ) : (
-          pizzaOrders.map((order) => (
+          foodOrders.map((order) => (
             <Box key={order.id} mb={2}>
               <Typography variant="h6" component="div">
                 Ordine {order.id}

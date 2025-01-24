@@ -7,19 +7,19 @@ import {
   SetStateAction,
 } from "react";
 import axios from "axios";
-import { Pizza } from "../types/Pizza";
+import { Food } from "../types/Food";
 import { ShopElement } from "../types/Shop";
 import { Order } from "../types/Order";
 import { User } from "../types/User";
 
 export type ShopContextType = {
   shop: ShopElement[];
-  addToCart: (pizza: Pizza) => void;
-  removeFromCart: (pizzaId: number) => void;
+  addToCart: (food: Food) => void;
+  removeFromCart: (foodId: number) => void;
   moveToOrders: () => void;
   fetchOrders?: () => void;
-  pizzaOrders: Order[];
-  setPizzaOrders: Dispatch<SetStateAction<Order[]>>;
+  foodOrders: Order[];
+  setFoodOrders: Dispatch<SetStateAction<Order[]>>;
   user: User[];
 };
 
@@ -28,16 +28,16 @@ const ShopContext = createContext<ShopContextType>({
   addToCart: () => {},
   removeFromCart: () => {},
   moveToOrders: () => {},
-  pizzaOrders: [],
+  foodOrders: [],
   fetchOrders: () => {},
-  setPizzaOrders: () => {},
+  setFoodOrders: () => {},
   user: [],
 });
 
 const ShopProvider = ({ children }: { children: ReactNode }) => {
   const [shop, setShop] = useState<ShopElement[]>([]);
   const [user, setUser] = useState(null);
-  const [pizzaOrders, setPizzaOrders] = useState<Order[]>([]);
+  const [foodOrders, setFoodOrders] = useState<Order[]>([]);
 
   const fetchCart = async () => {
     try {
@@ -55,22 +55,22 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
   const fetchOrders = async () => {
     try {
       const response = await axios.get("http://localhost:8000/ordini");
-      setPizzaOrders(response.data);
+      setFoodOrders(response.data);
     } catch (error) {
       console.error("Errore nel caricamento degli ordini:", error);
     }
   };
 
-  const addToCart = async (pizza: Pizza) => {
+  const addToCart = async (food: Food) => {
     await axios.post("http://localhost:8000/carrello", {
-      pizza: pizza,
+      food: food,
     });
 
     fetchCart();
   };
 
-  const removeFromCart = (pizzaId: number) => {
-    const cartItem = shop.find((item) => item.pizza.id === pizzaId);
+  const removeFromCart = (foodId: number) => {
+    const cartItem = shop.find((item) => item.food.id === foodId);
 
     if (cartItem) {
       const cartId = cartItem.id;
@@ -80,7 +80,7 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
       axios
         .delete(`http://localhost:8000/carrello/${cartId}`)
         .then((response) => {
-          console.log("Pizza rimossa dal carrello", response);
+          console.log("Elemento rimosso dal carrello", response);
         })
         .catch((error) => {
           console.error("Errore nella rimozione dal carrello", error);
@@ -89,10 +89,10 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const moveToOrders = async () => {
-    const orders = shop.map((item) => item.pizza);
+    const orders = shop.map((item) => item.food);
 
     try {
-      await axios.post("http://localhost:8000/ordini", { pizze: orders });
+      await axios.post("http://localhost:8000/ordini", { food: orders });
 
       const deletePromises = shop.map((item) =>
         axios.delete(`http://localhost:8000/carrello/${item.id}`)
@@ -101,7 +101,7 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
       await Promise.all(deletePromises);
       setShop([]);
     } catch (error) {
-      console.error("Errore nel trasferire le pizze agli ordini:", error);
+      console.error("Errore nel trasferire il carrello agli ordini:", error);
     }
   };
 
@@ -114,8 +114,8 @@ const ShopProvider = ({ children }: { children: ReactNode }) => {
         moveToOrders,
         user,
         setUser,
-        pizzaOrders,
-        setPizzaOrders,
+        foodOrders,
+        setFoodOrders,
         fetchOrders,
       }}
     >

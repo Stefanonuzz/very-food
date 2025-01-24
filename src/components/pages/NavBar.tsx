@@ -37,7 +37,7 @@ export default function NavBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar style={{ backgroundColor: colors.red[900] }} position="fixed">
+      <AppBar style={{ backgroundColor: colors.yellow[900] }} position="fixed">
         <Toolbar>
           <Box
             sx={{
@@ -49,16 +49,13 @@ export default function NavBar() {
             onClick={goToHome}
           >
             <img
-              src="photos/awesome logo.png"
-              alt="Awesome Logo"
+              src="photos/mini-logo-vf.png"
+              alt="Logo"
               style={{
-                width: 30,
-                height: 30,
+                width: 90,
+                height: 40,
               }}
             />
-            <Typography variant="h6" component="div">
-              wesome Pizza
-            </Typography>
           </Box>
           <Button onClick={goToHome} color="inherit">
             Home
@@ -81,7 +78,7 @@ export default function NavBar() {
             </Box>
           ) : (
             <Button onClick={goToLogin} color="inherit">
-              Area Pizzaiolo
+              Area ordini
             </Button>
           )}
           <div className="ml-4">

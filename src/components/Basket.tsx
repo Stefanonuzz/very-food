@@ -20,7 +20,7 @@ export const Basket = () => {
   const { shop, removeFromCart } = useContext<ShopContextType>(ShopContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const pizzasFromShop = shop.map((item) => item.pizza);
+  const pizzasFromShop = shop.map((item) => item.food);
   const groupedShop = countByProperty(pizzasFromShop, "id");
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ export const Basket = () => {
         color="inherit"
         aria-label="logo"
       >
-        <Badge badgeContent={shop.length} color="warning" showZero={false}>
+        <Badge badgeContent={shop.length} color="secondary" showZero={false}>
           <AddShoppingCartIcon />
         </Badge>
       </IconButton>
@@ -53,32 +53,32 @@ export const Basket = () => {
           </Typography>
           <List>
             {groupedShop.length > 0 ? (
-              groupedShop.map((pizza, index) => (
+              groupedShop.map((element, index) => (
                 <ListItem key={index} sx={{ borderBottom: "1px solid #ccc" }}>
                   <Grid container spacing={2} alignItems="center">
                     <Grid item>
                       <img
-                        src={pizza.item.image}
-                        alt={pizza.item.name}
+                        src={element.item.image}
+                        alt={element.item.name}
                         style={{ width: "60px", height: "50px" }}
                       />
                     </Grid>
                     <Grid item xs>
                       <Typography variant="body1">
-                        {pizza.item?.name || "Sconosciuto"}
+                        {element.item?.name || "Sconosciuto"}
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
-                        Prezzo: €{pizza.item?.price}
+                        Prezzo: €{element.item?.price}
                       </Typography>
                       <Typography variant="body2" color="textSecondary">
-                        Quantità: {pizza.count}
+                        Quantità: {element.count}
                       </Typography>
                     </Grid>
                     <Grid item>
                       <Button
                         variant="outlined"
-                        color="error"
-                        onClick={() => removeFromCart(pizza.item.id)}
+                        color="primary"
+                        onClick={() => removeFromCart(element.item.id)}
                         sx={{ minWidth: "40px" }}
                       >
                         <DeleteIcon />
@@ -98,7 +98,7 @@ export const Basket = () => {
               <Button
                 onClick={goToCheckout}
                 variant="contained"
-                color="error"
+                color="warning"
                 fullWidth
               >
                 Procedi all'ordine
