@@ -78,7 +78,7 @@ export default function NavBar() {
             </Box>
           ) : (
             <Button onClick={goToLogin} color="inherit">
-              Area ordini
+              Area Admin
             </Button>
           )}
           <div className="ml-4">
