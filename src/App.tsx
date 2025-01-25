@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Header />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/pizzaiolo-page" element={<AdminPage />} />
+          <Route path="/admin-page" element={<AdminPage />} />
         </Routes>
       </div>
     </Router>

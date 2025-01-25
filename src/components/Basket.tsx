@@ -20,8 +20,8 @@ export const Basket = () => {
   const { shop, removeFromCart } = useContext<ShopContextType>(ShopContext);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const pizzasFromShop = shop.map((item) => item.food);
-  const groupedShop = countByProperty(pizzasFromShop, "id");
+  const foodFromShop = shop.map((item) => item.food);
+  const groupedShop = countByProperty(foodFromShop, "id");
   const navigate = useNavigate();
 
   const goToCheckout = () => {
